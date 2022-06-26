@@ -1,16 +1,22 @@
-import { Table, Column, Model } from "sequelize-typescript";
+import { Entity, ObjectID, ObjectIdColumn, Column, OneToMany } from "typeorm";
+import { Todo } from "../todos/todo.model";
 
-@Table
-export class User extends Model {
-    @Column({ primaryKey: true, autoIncrement: true })
-    id: number;
-    
-    @Column
+
+@Entity("user")
+export class User  {
+    @ObjectIdColumn()
+    id: ObjectID;
+
+    @Column()
     name: string;
 
-    @Column
+    @Column()
     email: string;
-    
-    @Column
+
+    @Column()
     password: string;
+
+
+    @OneToMany(type => Todo, todo => todo.user_id)
+    todos: Todo[];
 }

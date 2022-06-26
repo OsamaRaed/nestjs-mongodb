@@ -14,21 +14,21 @@ export class TodoController {
     
     @Get()
     async getTodos(@Request() req) {
-        return  this.todoService.findAll(req.body.user.id);
+        return  this.todoService.findAll(req.user.id.toString());
     }
     
     @Post()
     async postTodos(@Request() req, @Body() body: CreateTodoDto) {
-        return  this.todoService.create(req.body.user.id, body);
+        return  this.todoService.create(req.user.id.toString(), body);
     }
 
     @Put(":id")
     async updateTodos(@Request() req, @Body() body: UpdateTodoDto, @Param() params) {
-        return  this.todoService.update(req.body.user.id, params.id, body);
+        return  this.todoService.update(req.user.id.toString(), params.id, body);
     }
     
     @Delete(":id")
     async deleteTodos(@Param() params, @Request() req) {
-        return  this.todoService.remove(req.body.user.id, params.id);
+        return  this.todoService.remove(req.user.id.toString(), params.id);
     }
 }

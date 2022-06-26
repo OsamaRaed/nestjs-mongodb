@@ -4,7 +4,6 @@ dotenv.config();
 
 export default () => ({
     database: {
-        dialect: 'mysql',
         host: process.env.DEV_DATABASE_HOST || 'localhost',
         port: parseInt(process.env.DEV_DATABASE_PORT, 10) || 3306,
         username: process.env.DEV_DATABASE_USERNAME || 'root',

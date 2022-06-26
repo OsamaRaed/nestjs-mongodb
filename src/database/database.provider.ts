@@ -1,20 +1,28 @@
-import { ConfigService } from '@nestjs/config';
-import { Sequelize } from 'sequelize-typescript';
-import { User } from '../users/user.model';
-import { Todo } from '../todos/todo.model';
-import { DATABASE_CONFIG } from 'src/common/constants';
-import { PROVIDERS } from '../common/enums/providers';
+import { ConfigService } from "@nestjs/config";
+import { PROVIDERS } from "../common/enums/providers";
+import { User } from "../users/user.model";
+import { Todo } from "../todos/todo.model";
+import { DataSource } from "typeorm";
 
-export const databaseProviders = [
+
+export const databaseProvider = [
+
     {
         provide: PROVIDERS.DATABASE_CONNECTION,
         useFactory: async (configService: ConfigService) => {
-            const sequelize = new Sequelize({
-                ...configService.get(DATABASE_CONFIG),
+            const dataSource = new DataSource({
+                type: "mongodb",
+                host: configService.get("database").host || "localhost",
+                port: configService.get("database").port || 27017,
+                database: configService.get("database").database,
+                entities: [User, Todo],
+                logging: true,
+                synchronize: true,
+                useNewUrlParser: true
             });
-            await sequelize.addModels([Todo, User]);
-            return sequelize;
+            return await dataSource.initialize();
         },
         inject: [ConfigService],
-    },
+    }
 ];
+

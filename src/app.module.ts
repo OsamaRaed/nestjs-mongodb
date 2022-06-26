@@ -3,7 +3,7 @@ import { UsersModule } from "./users/users.module";
 import { TodosModule } from "./todos/todos.module";
 import { ConfigModule } from "@nestjs/config";
 import { DatabaseModule } from "./database/database.module";
-import configFile from '../configDb'
+import configFile from '../config'
 
 @Module({
     imports: [

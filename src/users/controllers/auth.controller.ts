@@ -11,11 +11,13 @@ export class AuthController {
     
     @Post("login")
     async login(@Body() body: LoginDto) {
+
         return this.userService.login(body);
     }
     
     @Post("signup")
     async signup(@Body() body: SignUpDto) {
+        console.log("signup");
         return this.userService.signup(body);
     }
 }

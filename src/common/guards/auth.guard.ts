@@ -28,8 +28,8 @@ export class AuthGuard implements CanActivate {
                 token,
                 process.env.JWT_SECRET
             );
-            const test = await this.userService.findOne(data.email);
-            request.body.user = test.toJSON();
+            request.user = await this.userService.findOne(data.email);
+            console.log(request.user);
             return true;
         } catch {
             return false;

@@ -1,21 +1,21 @@
-import { Table, Column, Model, ForeignKey } from "sequelize-typescript";
+import { Entity, ObjectID, ObjectIdColumn, Column, ManyToOne, JoinColumn } from "typeorm";
 import { User } from "../users/user.model";
 
-@Table
-export class Todo extends Model {
-    @Column({ primaryKey: true, autoIncrement: true })
-    id: number;
+
+@Entity("todos")
+export class Todo {
+    @ObjectIdColumn()
+    id: ObjectID;
     
-    @Column
+    @Column()
     title: string;
     
-    @Column
+    @Column()
     description: string;
     
-    @Column
+    @Column()
     status: boolean;
-    
-    
-    @ForeignKey( () => User )
-    user_id: number
+
+    @Column()
+    user_id: string;
 }

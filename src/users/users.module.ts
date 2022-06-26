@@ -5,6 +5,7 @@ import { DatabaseModule } from "../database/database.module";
 import { UsersController } from "./controllers/user.controller";
 import { AuthController } from "./controllers/auth.controller";
 
+
 @Module({
     imports: [DatabaseModule],
     providers: [UsersService, ...UserProviders],

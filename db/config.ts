@@ -1,2 +1,2 @@
-import config from '../configDb';
+import config from '../config';
 module.exports = config().database ;
